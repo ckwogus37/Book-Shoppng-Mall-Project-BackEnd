@@ -30,4 +30,4 @@ router
     )
 
 
-exports.module = router;
+    module.exports = router;
