@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const conn = require('../mariadb');
 const {param, body, validationResult} = require('express-validator');
 const {join, login, passwordResetRequest, passwordReset} = require('../controller/UserController');
 
