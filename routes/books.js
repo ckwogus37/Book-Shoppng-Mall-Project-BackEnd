@@ -5,7 +5,7 @@ const {allBooks, bookDetail} = require('../controller/BookController');
 router.use(express.json());
 
 router.get('/', allBooks);
-router.get('/:id', bookDetail);
+router.get('/:book_id', bookDetail);
 
 
 

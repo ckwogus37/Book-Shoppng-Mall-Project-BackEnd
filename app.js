@@ -16,7 +16,7 @@ const ordersRouter = require('./routes/orders');
 app.use('/users', userRouter);
 app.use('/books',booksRouter);
 app.use('/category',categoryRouter);
-app.use('/likes/:bookd_id',likesRouter);
+app.use('/likes',likesRouter);
 app.use('/carts', cartsRouter);
 app.use('/orders',ordersRouter);
 
