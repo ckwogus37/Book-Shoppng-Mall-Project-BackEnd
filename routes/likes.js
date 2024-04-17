@@ -5,10 +5,8 @@ const {addLike, deleteLike} = require('../controller/LikeController');
 router.use(express.json());
 
 
-router
-    .route('/:book_id')
-    .post(addLike)
-    .delete(deleteLike)
+router.post('/:book_id', addLike)
+router.delete('/:book_id', deleteLike)
 
 
-    module.exports = router;
+module.exports = router;

@@ -4,14 +4,10 @@ const {addToCart, getCartItems, removeCartItem} = require('../controller/CartCon
 
 router.use(express.json());
 
+router.post('/', addToCart)
+router.get('/', getCartItems) 
 
-router
-    .route('/')
-    .post(addToCart)
-    .get(getCartItems) 
-
-router
-    .delete('/:id',removeCartItem)
+router.delete('/:cartItems_id',removeCartItem)
 
 
 module.exports = router;

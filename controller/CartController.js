@@ -44,10 +44,10 @@ const getCartItems = (req,res)=>{
 }
 
 const removeCartItem = (req,res)=>{
-    const {id} = req.params;
+    const {cartItems_id} = req.params;
 
     let sql = `DELETE FROM cartItems WHERE id = ?`;
-    conn.query(sql, id, 
+    conn.query(sql, cartItems_id, 
         (err, results)=>{
             if(err){
                 console.log(err)
