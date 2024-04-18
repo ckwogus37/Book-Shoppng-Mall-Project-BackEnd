@@ -1,28 +1,36 @@
-const conn = require('../mariadb');
+// 240418_일일과제인증_차재현
+
+// const conn = require('../mariadb');
+const mariadb = require('mysql2/promise');
 const {StatusCodes} = require('http-status-codes');
 
-const order = (req,res)=>{
+const order = async (req,res)=>{
+
+    const conn = await mariadb.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password : 'root',
+        database: 'Book-Shopping-Mall',
+        dateStrings : true 
+      });
+
     const {items, delivery, totalQuantity, totalPrice, user_id, firstBookTitle} = req.body;
 
-    let delivery_id = 3;
-    let order_id = 2;
+    
+    let order_id;
 
     let sql = `INSERT INTO delivery (address, receiver, contact) VALUES (?, ?, ?)`;
     let values = [delivery.address, delivery.receiver, delivery.contact];
-    // conn.query(sql, value, 
-    //     (err, results)=>{
-    //         if(err){
-    //             console.log(err)
-    //             return res.status(StatusCodes.BAD_REQUEST).end();
-    //         }
-    //         delivery_id = results.insertId;
-            
-    //     }
-    // );
+    
+    let [results] = await conn.query(sql, values);
 
-    sql = `INSERT INTO orders (book_title, total_quantity, total_price, user_id, delivery_id)
-            VALUES (?, ?, ?, ?, ?)`
-    values = [firstBookTitle, totalQuantity, totalPrice, user_id, delivery_id];
+    let delivery_id = results.insertId;
+    console.log(delivery_id);
+    // console.log("(3) out-delivery_id :", delivery_id);
+    
+    // sql = `INSERT INTO orders (book_title, total_quantity, total_price, user_id, delivery_id)
+    //         VALUES (?, ?, ?, ?, ?)`
+    // values = [firstBookTitle, totalQuantity, totalPrice, user_id, delivery_id];
     // conn.query(sql, values, 
     //     (err, results)=>{
     //         if(err){
@@ -30,31 +38,28 @@ const order = (req,res)=>{
     //             return res.status(StatusCodes.BAD_REQUEST).end();
     //         }
     //         order_id = results.insertId;
-    //         console.log(order_id);
-
-    //         return res.status(StatusCodes.OK).json(results);
             
     //     }
     // );       
 
-    sql = `INSERT INTO orderedBook (order_id, book_id, quantity) VALUES ?`
-    values = [];
+    // sql = `INSERT INTO orderedBook (order_id, book_id, quantity) VALUES ?`
+    // values = [];
 
-    items.forEach((item)=>{
-        values.push([order_id, item.book_id, item.quantity]);
-    })
+    // items.forEach((item)=>{
+    //     values.push([order_id, item.book_id, item.quantity]);
+    // })
 
-    conn.query(sql, [values], 
-        (err, results)=>{
-            if(err){
-                console.log(err)
-                return res.status(StatusCodes.BAD_REQUEST).end();
-            }
+    // conn.query(sql, [values], 
+    //     (err, results)=>{
+    //         if(err){
+    //             console.log(err)
+    //             return res.status(StatusCodes.BAD_REQUEST).end();
+    //         }
 
-            return res.status(StatusCodes.OK).json(results);
+    //         return res.status(StatusCodes.OK).json(results);
             
-        }
-    ); 
+    //     }
+    // ); 
 
 
 
