@@ -1,5 +1,3 @@
-// 240418_일일과제인증_차재현
-
 // const conn = require('../mariadb');
 const mariadb = require('mysql2/promise');
 const {StatusCodes} = require('http-status-codes');
