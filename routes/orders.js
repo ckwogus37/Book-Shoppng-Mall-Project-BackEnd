@@ -7,7 +7,7 @@ router.use(express.json());
 
 router.post('/', order)
 router.get('/', getOrders)
-router.get('/:order_id', getOrderDetail)
+router.get('/:id', getOrderDetail)
 
 
 module.exports = router;

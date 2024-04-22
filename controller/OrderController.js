@@ -67,7 +67,7 @@ const getOrders = async (req,res)=>{
 }
 
 const getOrderDetail = async (req,res)=>{
-    const {order_id} = req.params;
+    const order_id = req.params.id;
     const conn = await mariadb.createConnection({
         host: 'localhost',
         user: 'root',

@@ -41,17 +41,16 @@ const login = (req,res)=>{
 
             if(loginUser && loginUser.password == hashPassword){
                 const token = jwt.sign({
+                    id : loginUser.id,
                     email : loginUser.email
                 },process.env.PRIVATE_KEY,{
-                    expiresIn : '5m',
+                    expiresIn : '1m',
                     issuer : "jaehyeon"
                 });
 
                 res.cookie('token',token,{
                     httpOnly : true
                 });
-
-                console.log(token);
 
                 return res.status(StatusCodes.OK).json(results);
             }else{

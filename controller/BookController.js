@@ -38,7 +38,7 @@ const allBooks = (req,res)=>{
 }
 
 const bookDetail = (req,res)=>{
-    let {book_id} = req.params;
+    let book_id = req.params.id;
     let {user_id} = req.body;
 
     let sql = `SELECT *,
