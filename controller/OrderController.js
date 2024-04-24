@@ -84,9 +84,13 @@ const getOrders = async (req,res)=>{
     }else{
         let sql = `SELECT orders.id, created_at, address, receiver, contact, book_title, total_quantity, total_price
                     FROM orders LEFT JOIN delivery
-                    ON orders.delivery_id = delivery.id`;
-        let [rows,fields] = await conn.execute(sql);
-
+                    ON orders.delivery_id = delivery.id
+                    WHERE orders.user_id = ?`;
+        let [rows,fields] = await conn.execute(sql,[decodedJwt.id]);
+        rows.map((row)=>{
+            row.bookTitle = row.book_title;
+            delete row.book_title;
+        })
         return res.status(StatusCodes.OK).json(rows);
     }
 }
@@ -117,7 +121,13 @@ const getOrderDetail = async (req,res)=>{
                     ON orderedBook.book_id = books.id
                     WHERE order_id = ?`;
         let [rows,fields] = await conn.execute(sql,[order_id]);
+        rows.map((row)=>{
+            row.bookId = row.book_id;
+            delete row.book_id;
 
+            row.bookTitle = row.book_title;
+            delete row.book_title;
+        })
         return res.status(StatusCodes.OK).json(rows);
     }
 }
