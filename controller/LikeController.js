@@ -10,7 +10,7 @@ const addLike = (req,res)=>{
 
     if(decodedJwt instanceof jwt.TokenExpiredError){
         return res.status(StatusCodes.UNAUTHORIZED).json({
-            message : "로그인 세션이 었습니다. 다시 로그인해 주십시오"
+            message : "로그인 세션이 만료되었습니다. 다시 로그인해 주십시오"
         });
     }else if(decodedJwt instanceof jwt.JsonWebTokenError){
         return res.status(StatusCodes.BAD_REQUEST).json({
