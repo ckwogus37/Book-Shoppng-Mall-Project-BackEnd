@@ -25,10 +25,6 @@ const addToCart = (req,res)=>{
                     console.log(err)
                     return res.status(StatusCodes.BAD_REQUEST).end();
                 }
-                results.map((result)=>{
-                    result.bookId = result.book_id;
-                    delete result.book_id;
-                })
                 return res.status(StatusCodes.CREATED).json(results);
             }
         );
@@ -66,10 +62,6 @@ const getCartItems = (req,res)=>{
                 console.log(err)
                 return res.status(StatusCodes.BAD_REQUEST).end();
             }
-            results.map((result)=>{
-                result.bookId = result.book_id;
-                delete result.book_id;
-            })
             return res.status(StatusCodes.CREATED).json(results);
         }   
         );
